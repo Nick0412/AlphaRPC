@@ -40,4 +40,6 @@ Types::ByteArray DataSocket::receiveData(size_t number_of_bytes_to_receive)
 
         number_bytes_received += recv(socket_pointer, offset_pointer_to_buffer, remaining_number_of_bytes, 0);
     }
+
+    return data_vector;
 }
