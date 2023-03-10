@@ -9,6 +9,11 @@ ClientSocket::ClientSocket(const Endpoint& endpoint)
     server_address.sin_addr.s_addr = inet_addr(endpoint.getIpAddress().c_str());
 }
 
+ClientSocket::~ClientSocket()
+{
+    close(socket_pointer);
+}
+
 void ClientSocket::connectToServer()
 {
     auto casted_socket_address = reinterpret_cast<const sockaddr*>(&server_address);
