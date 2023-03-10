@@ -17,7 +17,7 @@ private:
 public:
     ClientSocket(const Endpoint& endpoint);
     void connectToServer();
-    void sendData(const Types::ByteArray& data);
+    void sendData(const Types::ByteArray& data_bytes);
     Types::ByteArray receiveData(size_t number_of_bytes_to_receive);
 };
 
