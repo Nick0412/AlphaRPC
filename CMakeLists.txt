@@ -9,6 +9,7 @@ add_library(
     src/Networking/ClientSocket.cpp
     src/Networking/DataSocket.cpp
     src/Networking/ServerSocket.cpp
+    src/Networking/Common.cpp
 )
 target_include_directories(
     Networking
