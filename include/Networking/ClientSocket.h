@@ -13,9 +13,12 @@ class ClientSocket
 private:
     int socket_pointer;
     struct sockaddr_in server_address;
+    bool is_connected;
 
 public:
+    ClientSocket() = delete;
     ClientSocket(const Endpoint& endpoint);
+    ClientSocket(ClientSocket&& other);
     ~ClientSocket();
 
     void connectToServer();

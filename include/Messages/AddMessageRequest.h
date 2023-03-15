@@ -2,6 +2,7 @@
 #define ADD_MESSAGE_REQUEST_H
 
 #include "Networking/Types.h"
+#include "MessageTypes.h"
 
 #include <cstdint>
 #include <memory>
@@ -18,7 +19,11 @@ public:
     uint32_t getOperandTwo() const;
 
     static AddMessageRequest Deserialize(const Types::ByteArray& data);
-    static Types::ByteArray Serialize(const AddMessageRequest& data);
+    static Types::ByteArray Serialize(const AddMessageRequest& msg);
+
+public:
+    static const size_t MESSAGE_SIZE_BYTES;
+    static const MessageType MESSAGE_TYPE;
 };
 
 #endif

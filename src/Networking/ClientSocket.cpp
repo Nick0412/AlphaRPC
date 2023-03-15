@@ -23,9 +23,21 @@ ClientSocket::ClientSocket(const Endpoint& endpoint)
     }
 }
 
+ClientSocket::ClientSocket(ClientSocket&& other)
+: socket_pointer(other.socket_pointer),
+  server_address(other.server_address),
+  is_connected(other.is_connected)
+{
+    other.socket_pointer = 0;
+    other.is_connected = false;
+}
+
 ClientSocket::~ClientSocket()
 {
-    close(socket_pointer);
+    if (is_connected)
+    {
+        close(socket_pointer);
+    }
 }
 
 void ClientSocket::connectToServer()
