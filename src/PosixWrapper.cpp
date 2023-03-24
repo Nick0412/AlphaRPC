@@ -45,4 +45,24 @@ namespace PosixWrapper
 
         return result;
     }
+
+    Types::SocketType CreateSocketWithExceptionWrapper(
+        Types::SocketDomain ip_type,
+        Types::SocketCommunication socket_communication,
+        int protocol)
+    {
+        int result = socket(
+            static_cast<int>(ip_type),
+            static_cast<int>(socket_communication),
+            protocol);
+
+        if (result == Constants::INVALID_SOCKET)
+        {
+            std::stringstream msg;
+            msg << "Failed to create socket. " << std::strerror(errno) << "\n";
+            throw std::runtime_error(msg.str());
+        }
+
+        return result;
+    }
 }

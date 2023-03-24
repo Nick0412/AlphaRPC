@@ -27,7 +27,6 @@ namespace PosixWrapper
         std::size_t offset_into_data_array,
         std::size_t number_of_bytes_remaining);
 
-
     /**
      * @brief 
      * 
@@ -42,6 +41,11 @@ namespace PosixWrapper
         Types::ByteBuffer& data,
         std::size_t offset_into_data_array,
         std::size_t number_of_bytes_remaining);
+
+    Types::SocketType CreateSocketWithExceptionWrapper(
+        Types::SocketDomain ip_type,
+        Types::SocketCommunication socket_communication,
+        int protocol);
 };
 
 #endif

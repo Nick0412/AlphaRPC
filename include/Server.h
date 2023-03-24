@@ -16,11 +16,15 @@ private:
     uint16_t port;
     Types::SocketDomain ip_type;
     Types::SocketCommunication socket_communication;
+    std::size_t initial_connection_count;
 
 public:
     Server() = delete;
 
     Server(const std::string& ip_address, uint16_t port, Types::SocketDomain ip_type, Types::SocketCommunication socket_communication, size_t initial_connection_count);
+
+    void listen();
+    
 };
 
 #endif

@@ -9,6 +9,11 @@ DataChannel::DataChannel(Types::SocketType&& socket)
     socket = Constants::INVALID_SOCKET;
 }
 
+DataChannel::~DataChannel()
+{
+    
+}
+
 void DataChannel::Send(const Types::ByteBuffer& data)
 {
     Common::SendDataOverSocket(data_socket, data);
