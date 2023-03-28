@@ -1,6 +1,9 @@
 #include "Common.h"
 
 #include "PosixWrapper.h"
+#include "Constants.h"
+
+#include <type_traits>
 
 namespace Common
 {
@@ -32,5 +35,39 @@ namespace Common
         }
 
         return data_buffer;
+    }
+
+    Types::ByteBuffer BuildComputeSumMessage(int32_t operand_one, int32_t operand_two)
+    {
+        uint32_t message_size = Constants::MESSAGE_SIZE_NUMBER_OF_BYTES +
+                                Constants::MESSAGE_TYPE_NUMBER_OF_BYTES +
+                                Constants::UINT_32_NUMBER_OF_BYTES +
+                                Constants::UINT_32_NUMBER_OF_BYTES;
+
+        Types::ByteBuffer request_byte_array(message_size);
+
+        auto size_bytes = ConvertInt32ToByteArray(message_size);
+        auto type_bytes = ConvertMessageTypeToByteArray(Types::MessageType::COMPUTE_SUM_MESSAGE);
+        auto operand_one_bytes = ConvertInt32ToByteArray(operand_one);
+        auto operand_two_bytes = ConvertInt32ToByteArray(operand_two);
+    }
+
+    Types::ByteBuffer ConvertInt32ToByteArray(uint32_t data)
+    {
+        Types::ByteBuffer data_bytes(4);
+        data_bytes[0] = data & 0xFF;
+        data_bytes[1] = (data >> 8) & 0xFF;
+        data_bytes[2] = (data >> 16) & 0xFF;
+        data_bytes[3] = (data >> 24) & 0xFF;
+
+        return data_bytes;
+    }
+
+    Types::ByteBuffer ConvertMessageTypeToByteArray(Types::MessageType message_type)
+    {
+        using MessageTypeUnderlying = std::underlying_type_t<Types::MessageType>;
+        MessageTypeUnderlying data = static_cast<MessageTypeUnderlying>(message_type);
+                
+        return ConvertInt32ToByteArray(data);
     }
 };

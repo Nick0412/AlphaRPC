@@ -30,6 +30,11 @@ namespace Types
         UDP = SOCK_DGRAM,
         RAW = SOCK_RAW
     };
+
+    enum class MessageType : uint32_t
+    {
+        COMPUTE_SUM_MESSAGE = 1
+    };
 };
 
 #endif
