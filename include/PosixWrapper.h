@@ -46,6 +46,8 @@ namespace PosixWrapper
         Types::SocketDomain ip_type,
         Types::SocketCommunication socket_communication,
         int protocol);
+
+    
 };
 
 #endif

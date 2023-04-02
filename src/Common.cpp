@@ -3,6 +3,8 @@
 #include "PosixWrapper.h"
 #include "Constants.h"
 
+#include <algorithm>
+#include <iterator>
 #include <type_traits>
 
 namespace Common
@@ -50,6 +52,20 @@ namespace Common
         auto type_bytes = ConvertMessageTypeToByteArray(Types::MessageType::COMPUTE_SUM_MESSAGE);
         auto operand_one_bytes = ConvertInt32ToByteArray(operand_one);
         auto operand_two_bytes = ConvertInt32ToByteArray(operand_two);
+
+        auto iter = request_byte_array.begin();
+        std::copy(size_bytes.begin(), size_bytes.end(), iter);
+        std::advance(iter, Constants::MESSAGE_SIZE_NUMBER_OF_BYTES);
+
+        std::copy(type_bytes.begin(), type_bytes.end(), iter);
+        std::advance(iter, Constants::MESSAGE_TYPE_NUMBER_OF_BYTES);
+
+        std::copy(operand_one_bytes.begin(), operand_one_bytes.end(), iter);
+        std::advance(iter, Constants::UINT_32_NUMBER_OF_BYTES);
+
+        std::copy(operand_two_bytes.begin(), operand_two_bytes.end(), iter);
+
+        return request_byte_array;
     }
 
     Types::ByteBuffer ConvertInt32ToByteArray(uint32_t data)

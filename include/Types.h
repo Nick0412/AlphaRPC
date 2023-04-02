@@ -2,6 +2,7 @@
 #define TYPES_H
 
 #include <sys/socket.h>
+#include <arpa/inet.h>
 #include <cstdint>
 #include <utility>
 #include <vector>

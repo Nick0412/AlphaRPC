@@ -62,7 +62,7 @@ namespace PosixWrapper
             msg << "Failed to create socket. " << std::strerror(errno) << "\n";
             throw std::runtime_error(msg.str());
         }
-
+        
         return result;
     }
 }
